@@ -941,6 +941,7 @@ For the assessment, you can only use basic string methods:
   "message": "Slug is already taken",
   "code": "SL02"
 }
+```
 
 **Good luck with your assessment!** 🚀
 
