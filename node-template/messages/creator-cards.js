@@ -12,6 +12,8 @@ const CreatorCardsMessages = {
   DRAFT_NOT_FOUND: 'Creator card not found',
   PRIVATE_ACCESS_REQUIRED: 'This card is private. An access code is required',
   INVALID_ACCESS_CODE: 'Invalid access code',
+  INVALID_URL: 'URL must start with http:// or https://',
+  RATES_REQUIRED: 'Rates must be a non-empty array when service_rates is provided',
 };
 
 module.exports = CreatorCardsMessages;
