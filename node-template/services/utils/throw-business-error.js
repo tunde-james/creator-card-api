@@ -1,10 +1,8 @@
-const {throwAppError} = require('@app-core/errors');
-
-function throwBusinessError(message, code, statusCode=400) {
+function throwBusinessError(message, customCode, customStatusCode = 400) {
   const error = new Error(message);
   error.isApplicationError = true;
-  error.errorCode = code;
-  error._customStatusCode  = statusCode;
+  error.customCode = customCode;
+  error.customStatusCode = customStatusCode;
   throw error;
 }
 

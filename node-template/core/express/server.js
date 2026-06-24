@@ -230,11 +230,11 @@ function Server(serverConfig = {}) {
       } catch (error) {
         const statusCode = !error.isApplicationError
           ? 500
-          : errorCodeMappings[error.errorCode] || 400;
+          : error.customStatusCode || errorCodeMappings[error.errorCode] || 400;
 
         const requestLog = createRequestLog(expressRequest);
 
-        requestLog.errorCode = error.errorCode;
+        requestLog.errorCode = error.customCode || error.errorCode;
         requestLog.errorMessage = error.message;
         requestLog.errorContext = error.context;
         requestLog.errorStack = error.stack;
@@ -246,8 +246,15 @@ function Server(serverConfig = {}) {
         responseComponents.body.message = error.isApplicationError
           ? error.message
           : 'Some error occured.';
-        responseComponents.body.errors = error.details || undefined;
-        responseComponents.body.data = error.context;
+
+        if (error.customCode || error.errorCode) {
+          responseComponents.body.code = error.customCode || error.errorCode;
+        }
+
+        if (!error.customCode) {
+          responseComponents.body.errors = error.details || undefined;
+          responseComponents.body.data = error.context;
+        }
 
         expressResponse.status(responseComponents.statusCode).json(responseComponents.body); // Todo: Add a callback config that can be used to handle this in a custom way.
       } finally {
@@ -255,7 +262,6 @@ function Server(serverConfig = {}) {
           try {
             handlerConfiguration.onResponseEnd(requestComponents, responseComponents);
           } catch (e) {
-            // Log error
             appLogger.error([e.message, e.stack], `onResponseEnd error`);
           }
         }

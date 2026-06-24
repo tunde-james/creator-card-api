@@ -1,5 +1,5 @@
 const { appLogger } = require('@app-core/logger');
-const CreatorCard = require('@app/repository/creator-cards/creator-card');
+const CreatorCard = require('@app/repository/creator-cards');
 const serializeCreatorCard = require('@app/services/utils/serialize-creator-card');
 const throwBusinessError = require('@app/services/utils/throw-business-error');
 const { CreatorCardsMessages: Messages } = require('@app/messages');

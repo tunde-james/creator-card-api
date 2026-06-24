@@ -929,6 +929,19 @@ For the assessment, you can only use basic string methods:
 
 ---
 
+## Patch: Error Response `code` Field
+
+**File modified:** `core/express/server.js`
+
+**Why:** The assessment requires custom business rule error codes (`SL02`, `AC01`, `AC05`, `NF01`, `NF02`, `AC03`, `AC04`) in the error response body:
+
+```json
+{
+  "status": "error",
+  "message": "Slug is already taken",
+  "code": "SL02"
+}
+
 **Good luck with your assessment!** 🚀
 
 Remember: This guide shows you HOW to structure your code, not WHAT logic to implement. The problem-solving is up to you!
